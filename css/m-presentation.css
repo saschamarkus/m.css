@@ -1,0 +1,158 @@
+/*
+    This file is part of m.css.
+
+    Copyright © 2017, 2018 Vladimír Vondruš <mosra@centrum.cz>
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the "Software"),
+    to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense,
+    and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE SOFTWARE.
+*/
+
+/* Preserve the same relative sizes and spacing independently on screen size */
+html { font-size: 2.5vw; }
+
+article { margin: -1rem; }
+article > aside, article > section {
+  height: 100vh;
+  padding: 1rem;
+  background-color: var(--background-color);
+}
+article > section#cover {
+  background-color: var(--header-background-color);
+}
+article > section#cover h1 {
+  font-size: 4rem;
+  padding-top: 6rem;
+}
+article > section#cover h2 {
+  font-size: 2rem;
+}
+article > section:not(#cover) > h2 {
+  line-height: 4rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  margin-top: -1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--header-background-color);
+}
+
+/* By default hide everything except the actual slideshow content */
+article > aside, article > section > aside.m-presenter {
+  display: none;
+}
+
+/* Screen-specific style */
+@media screen {
+  /* Show the "welcome page" when not in presenter mode. It gets covered by any
+     slide that gets opened. */
+  html:not(.m-presenter) article > aside {
+    display: block;
+    position: absolute;
+    z-index: -1;
+  }
+
+  /* Show only the slide that is currently active. Another option would be to
+     make overflow hidden and just jump to section IDs by changing URL hash.
+     But sometimes we might want to scroll (unusual browser window aspect
+     ratios) and the presenter mode won't work very well. */
+  article > section { display: none; }
+  article > section:target { display: block; }
+}
+
+/* Don't limit the container width when in presentation mode or in print */
+html:not(.m-presenter) .m-container { width: 100%; }
+@media print { .m-container { width: 100%; } }
+
+/* Print style. Oh well, the support... */
+@media print {
+  /* Preserve background color. WebKit-only, color-adjust: exact; *should* work
+     in Firefox, but affects only background color, font stays black which is
+     nowhere near usable. Users should explicitly check the "Preserve
+     background colors" option when printing. */
+  body { -webkit-print-color-adjust: exact; }
+
+  /* Otherwise Firefox would print one page more. 99.999999vh is one 9 too
+     much, 100vh also doesn't work. */
+  article > section:last-child { height: 99.99999vh; }
+
+  /* Every slide on its own page. Firefox would insert first blank page if I
+     would not exclude #cover here. */
+  article > section:not(#cover) { page-break-before: always; }
+
+  /* Page setup. Size works only on Chrome, on Firefox you need to add a new
+     size manually. */
+  @page {
+    margin: 0;
+    size: 297mm 167mm; /* 16:9 to fit on an A4 */
+  }
+}
+
+/* Presenter mode specifics. At the moment it's not possible to print presenter
+   mode because CSS @page can't be affected with any classes or IDs. */
+@media screen {
+  /* Preserve font size for the slides the same as in slideshow mode */
+  @media screen and (min-width: 576px) {
+    html.m-presenter { font-size: 14px; } /* 2.5% of 560px */
+  }
+  @media screen and (min-width: 768px) {
+    html.m-presenter { font-size: 18.75px; } /* 2.5% of 750px */
+  }
+  @media screen and (min-width: 992px) {
+    /* Here the presentation is displayed in the center 10 columns, adjusting
+      font size appropriately (would be 24px otherwise) */
+    html.m-presenter { font-size: 20px; } /* 2.5% of 10/12 of 960px */
+  }
+
+  html.m-presenter {
+    background-color: transparent;
+  }
+  html.m-presenter article {
+    margin: 0;
+    background-color: var(--background-color);
+  }
+  html.m-presenter article > section#cover {
+    height: 100%;
+  }
+  html.m-presenter article > section > aside.m-presenter {
+    display: block;
+    font-size: var(--font-size);
+  }
+  html.m-presenter article {
+    padding-top: 56.25%; /* 16:9 */
+    position: relative;
+  }
+  html.m-presenter article > section {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: auto;
+  }
+  html.m-presenter article > section > aside.m-presenter {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    margin-top: 56.25%; /* 16:9 */
+    padding-top: 1rem;
+    color: #000000;
+  }
+}
+
+/* kate: indent-width 2; */
