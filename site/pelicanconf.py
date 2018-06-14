@@ -77,12 +77,13 @@ M_LINKS_NAVBAR1 = [('Why?', 'why/', 'why', []),
                         ('Typography', 'css/typography/', 'css/typography'),
                         ('Components', 'css/components/', 'css/components'),
                         ('Page layout', 'css/page-layout/', 'css/page-layout'),
+                        ('Presentation', 'css/presentation/', 'css/presentation'),
                         ('Themes', 'css/themes/', 'css/themes')]),
                    ('Pelican', 'pelican/', 'pelican', [
                         ('Writing content', 'pelican/writing-content/', 'pelican/writing-content'),
                         ('Theme', 'pelican/theme/', 'pelican/theme')])]
 
-M_LINKS_NAVBAR2 = [('Pelican plugins', 'plugins/', 'plugins', [
+M_LINKS_NAVBAR2 = [('Plugins', 'plugins/', 'plugins', [
                         ('HTML sanity', 'plugins/htmlsanity/', 'plugins/htmlsanity'),
                         ('Components', 'plugins/components/', 'plugins/components'),
                         ('Images', 'plugins/images/', 'plugins/images'),
@@ -91,7 +92,7 @@ M_LINKS_NAVBAR2 = [('Pelican plugins', 'plugins/', 'plugins', [
                         ('Plots and graphs', 'plugins/plots-and-graphs/', 'plugins/plots-and-graphs'),
                         ('Metadata', 'plugins/metadata/', 'plugins/metadata')]),
                    ('Doxygen theme', 'doxygen/', 'doxygen', []),
-                   ('GitHub', 'https://github.com/mosra/m.css', '', [])]
+                   ('Presentation framework', 'presentations/', 'presentations', [])]
 
 M_LINKS_FOOTER1 = [('m.css', '/'),
                    ('Why?', 'why/'),
@@ -106,15 +107,18 @@ M_LINKS_FOOTER2 = [('CSS', 'css/'),
                    ('Typography', 'css/typography/'),
                    ('Components', 'css/components/'),
                    ('Page layout', 'css/page-layout/'),
+                   ('Presentation', 'css/presentation/'),
                    ('Themes', 'css/themes/')]
 
 M_LINKS_FOOTER3 = [('Pelican', 'pelican/'),
                    ('Writing content', 'pelican/writing-content/'),
                    ('Theme', 'pelican/theme/'),
                    ('', ''),
-                   ('Doxygen theme', 'doxygen/')]
+                   ('Doxygen theme', 'doxygen/'),
+                   ('', ''),
+                   ('Presentation framework', 'presentation/')]
 
-M_LINKS_FOOTER4 = [('Pelican plugins', 'plugins/'),
+M_LINKS_FOOTER4 = [('Plugins', 'plugins/'),
                    ('HTML sanity', 'plugins/htmlsanity/'),
                    ('Components', 'plugins/components/'),
                    ('Images', 'plugins/images/'),
@@ -193,4 +197,4 @@ CATEGORIES_SAVE_AS = None # Not used
 TAGS_SAVE_AS = None # Not used
 
 SLUGIFY_SOURCE = 'basename'
-PATH_METADATA = '(?P<slug>.+).rst'
+PATH_METADATA = '(?P<slug>.+).(rst|html)'

@@ -22,26 +22,54 @@
     DEALINGS IN THE SOFTWARE.
 */
 
-/* Preserve the same relative sizes and spacing independently on screen size */
-html { font-size: 2.5vw; }
+/* Preserve the same relative sizes and spacing independently on screen size.
+   Background color is handled by the slides themselves, reset it so the
+   presenter view has clearly separated slide view on white background. */
+html {
+  font-size: 2.5vw;
+  background-color: transparent;
+}
 
 article { margin: -1rem; }
 article > aside, article > section {
-  height: 100vh;
+  min-height: 100vh;
   padding: 1rem;
-  background-color: var(--background-color);
 }
-article > section#cover {
+article > aside {
   background-color: var(--header-background-color);
 }
-article > section#cover h1 {
+article > aside > h1 {
   font-size: 4rem;
-  padding-top: 6rem;
+  padding-top: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 2rem;
 }
-article > section#cover h2 {
+article > section {
+  background-color: var(--background-color);
+}
+/* h1, if present, covers the whole slide with a darker color. h2 goes over it
+   using a negative margin. Can't use absolute positioning as that breaks
+   print. */
+article > section > h1 {
+  margin: -1rem;
+  padding-top: 7rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  min-height: 100vh;
+  font-size: 4rem;
+  background-color: var(--header-background-color);
+}
+article > section > h1 + h2 {
+  margin-top: -100vh;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-top: 13rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   font-size: 2rem;
 }
-article > section:not(#cover) > h2 {
+article > section > h2:first-child {
   line-height: 4rem;
   margin-left: -1rem;
   margin-right: -1rem;
@@ -59,12 +87,15 @@ article > aside, article > section > aside.m-presenter {
 
 /* Screen-specific style */
 @media screen {
-  /* Show the "welcome page" when not in presenter mode. It gets covered by any
-     slide that gets opened. */
-  html:not(.m-presenter) article > aside {
+  /* Show the first slide or the boot menu when not in presenter mode. It gets
+     covered by any other slide after. */
+  html:not(.m-presenter) article > *:first-child {
     display: block;
     position: absolute;
+    left: 0;
+    right: 0;
     z-index: -1;
+    overflow: hidden;
   }
 
   /* Show only the slide that is currently active. Another option would be to
@@ -92,8 +123,8 @@ html:not(.m-presenter) .m-container { width: 100%; }
   article > section:last-child { height: 99.99999vh; }
 
   /* Every slide on its own page. Firefox would insert first blank page if I
-     would not exclude #cover here. */
-  article > section:not(#cover) { page-break-before: always; }
+     would not exclude the first here. */
+  article > section:not(:first-of-type) { page-break-before: always; }
 
   /* Page setup. Size works only on Chrome, on Firefox you need to add a new
      size manually. */
@@ -119,23 +150,14 @@ html:not(.m-presenter) .m-container { width: 100%; }
     html.m-presenter { font-size: 20px; } /* 2.5% of 10/12 of 960px */
   }
 
-  html.m-presenter {
-    background-color: transparent;
-  }
+  /* In the presenter view <article> is a container maintaining aspect ratio,
+     <section> fills it with 100% height (instead of 100vh) and everything
+     positions absolutely instead of having negative margins. */
   html.m-presenter article {
-    margin: 0;
-    background-color: var(--background-color);
-  }
-  html.m-presenter article > section#cover {
-    height: 100%;
-  }
-  html.m-presenter article > section > aside.m-presenter {
-    display: block;
-    font-size: var(--font-size);
-  }
-  html.m-presenter article {
-    padding-top: 56.25%; /* 16:9 */
     position: relative;
+    margin: 0;
+    padding-top: 56.25%; /* 16:9 */
+    background-color: var(--background-color);
   }
   html.m-presenter article > section {
     position: absolute;
@@ -143,15 +165,34 @@ html:not(.m-presenter) .m-container { width: 100%; }
     right: 0;
     top: 0;
     bottom: 0;
-    height: auto;
+    min-height: 100%;
   }
+  html.m-presenter article > section > h1 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    min-height: 100%;
+    margin: 0;
+  }
+  html.m-presenter article > section > h1 + h2 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+  }
+  /* The presenter notes are stuck right below the <section> element. */
   html.m-presenter article > section > aside.m-presenter {
+    display: block;
     position: absolute;
     top: 0;
-    width: 100%;
     margin-top: 56.25%; /* 16:9 */
     padding-top: 1rem;
     color: #000000;
+    font-size: var(--font-size);
   }
 }
 

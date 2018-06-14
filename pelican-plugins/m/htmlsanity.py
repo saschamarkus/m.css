@@ -793,6 +793,11 @@ def expand_links(text, content):
 def format_siteurl(url):
     return urljoin(settings['SITEURL'] + ('/' if not settings['SITEURL'].endswith('/') else ''), url)
 
+def configure(setting_overrides):
+    global settings
+    settings['M_HTMLSANITY_HYPHENATION'] = setting_overrides.get('M_HTMLSANITY_HYPHENATION', False)
+    settings['M_HTMLSANITY_SMART_QUOTES'] = setting_overrides.get('M_HTMLSANITY_SMART_QUOTES', False)
+
 def configure_pelican(pelicanobj):
     pelicanobj.settings['JINJA_FILTERS']['render_rst'] = render_rst
     pelicanobj.settings['JINJA_FILTERS']['expand_links'] = expand_links
@@ -817,9 +822,7 @@ def configure_pelican(pelicanobj):
     else:
         pelicanobj.settings['JINJA_FILTERS']['expand_link'] = expand_link
 
-    global settings
-    settings['M_HTMLSANITY_HYPHENATION'] = pelicanobj.settings.get('M_HTMLSANITY_HYPHENATION', False)
-    settings['M_HTMLSANITY_SMART_QUOTES'] = pelicanobj.settings.get('M_HTMLSANITY_SMART_QUOTES', False)
+    configure(pelicanobj.settings)
     for i in 'DEFAULT_LANG', 'DOCUTILS_SETTINGS', 'INTRASITE_LINK_REGEX', 'SITEURL', 'FORMATTED_FIELDS':
         settings[i] = pelicanobj.settings[i]
 
