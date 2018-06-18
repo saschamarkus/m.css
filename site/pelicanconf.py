@@ -92,7 +92,7 @@ M_LINKS_NAVBAR2 = [('Plugins', 'plugins/', 'plugins', [
                         ('Plots and graphs', 'plugins/plots-and-graphs/', 'plugins/plots-and-graphs'),
                         ('Metadata', 'plugins/metadata/', 'plugins/metadata')]),
                    ('Doxygen theme', 'doxygen/', 'doxygen', []),
-                   ('Presentation framework', 'presentations/', 'presentations', [])]
+                   ('Presentation framework', 'presentation/', 'presentation', [])]
 
 M_LINKS_FOOTER1 = [('m.css', '/'),
                    ('Why?', 'why/'),

@@ -30,9 +30,9 @@ html {
   background-color: transparent;
 }
 
-article { margin: -1rem; }
+/* article { margin: -1rem; } */ /* TODO: or leave it? it breaks print in presenter mode because there's no m-nopad applied on col */
 article > aside, article > section {
-  min-height: 100vh;
+  height: 100vh;
   padding: 1rem;
 }
 article > aside {
@@ -46,7 +46,16 @@ article > aside > h1 {
   padding-bottom: 2rem;
 }
 article > section {
+  position: relative; /* TODO remove */
+/*   overflow: hidden; */ /* TODO: it should be possible to view the slides
+  on a phone screen, so can't do this */
   background-color: var(--background-color);
+}
+article > section.m-presentation-cover {
+  background-size: cover;
+  background-color: var(--header-background-color);
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 /* h1, if present, covers the whole slide with a darker color. h2 goes over it
    using a negative margin. Can't use absolute positioning as that breaks
@@ -56,9 +65,21 @@ article > section > h1 {
   padding-top: 7rem;
   padding-left: 2rem;
   padding-right: 2rem;
-  min-height: 100vh;
+  height: 100vh;
   font-size: 4rem;
+}
+/* So the user doesn't have to specify the .m-presentation-cover class
+   explicitly every time */
+article > section:not(.m-presentation-cover) > h1 {
   background-color: var(--header-background-color);
+}
+article > section.m-presentation-cover > h1,
+article > section.m-presentation-cover > h2 {
+  color: #ffffff;
+}
+article > section.m-presentation-cover.m-inverted > h1,
+article > section.m-presentation-cover.m-inverted > h2 {
+  color: #000000;
 }
 article > section > h1 + h2 {
   margin-top: -100vh;
@@ -70,7 +91,8 @@ article > section > h1 + h2 {
   font-size: 2rem;
 }
 article > section > h2:first-child {
-  line-height: 4rem;
+  color: var(--article-heading-color);
+  line-height: 3.5rem;
   margin-left: -1rem;
   margin-right: -1rem;
   margin-top: -1rem;
@@ -79,6 +101,35 @@ article > section > h2:first-child {
   margin-bottom: 1rem;
   background-color: var(--header-background-color);
 }
+article > section > nav {
+  font-size: 85.4%; /* Equivalent to .m-small */
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-bottom: 1.0rem;
+  padding-right: 0.5rem;
+}
+article > section > nav > a {
+  text-decoration: var(--link-decoration-nav);
+  display: inline-block;
+  width: 1.5rem;
+}
+article > section > nav > a:link, article > section > nav > a:visited {
+  color: var(--dim-link-color);
+}
+article > section > nav > a:hover, article > section > nav > a:active {
+  color: var(--dim-link-active-color);
+}
+article > section > nav > a.m-presentation-cover {
+  text-align: center;
+  width: 2.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+article > section > nav > a.m-presentation-prev { text-align: right; }
+article > section > nav > a.m-presentation-prev::before { content: '«'; }
+article > section > nav > a.m-presentation-next { text-align: left; }
+article > section > nav > a.m-presentation-next::before { content: '»'; }
 
 /* By default hide everything except the actual slideshow content */
 article > aside, article > section > aside.m-presenter {
@@ -112,6 +163,9 @@ html:not(.m-presenter) .m-container { width: 100%; }
 
 /* Print style. Oh well, the support... */
 @media print {
+  /* Hide navigation, it has no use in a PDF */
+  article > section > nav { display: none; }
+
   /* Preserve background color. WebKit-only, color-adjust: exact; *should* work
      in Firefox, but affects only background color, font stays black which is
      nowhere near usable. Users should explicitly check the "Preserve
@@ -137,17 +191,37 @@ html:not(.m-presenter) .m-container { width: 100%; }
 /* Presenter mode specifics. At the moment it's not possible to print presenter
    mode because CSS @page can't be affected with any classes or IDs. */
 @media screen {
-  /* Preserve font size for the slides the same as in slideshow mode */
+  /*
+      Preserve font size for the slides the same as in slideshow mode. The
+      container has 1rem padding on sizes, need to account for that as well.
+
+      font_size = 0.025*content_width = 0.025*(container_width - 2*font_size)
+      font_size = 0.0238095*container_width
+  */
+  html.m-presenter { font-size: 2.381vw; }
+
   @media screen and (min-width: 576px) {
-    html.m-presenter { font-size: 14px; } /* 2.5% of 560px */
+    html.m-presenter { font-size: 13.3333px; } /* 2.381% of 560px */
   }
   @media screen and (min-width: 768px) {
-    html.m-presenter { font-size: 18.75px; } /* 2.5% of 750px */
+    html.m-presenter { font-size: 17.8571px; } /* 2.381% of 750px */
   }
   @media screen and (min-width: 992px) {
     /* Here the presentation is displayed in the center 10 columns, adjusting
-      font size appropriately (would be 24px otherwise) */
-    html.m-presenter { font-size: 20px; } /* 2.5% of 10/12 of 960px */
+       font size appropriately (would be 24px otherwise) */
+    html.m-presenter { font-size: 19.0476px; } /* 2.381% of 10/12 of 960px */
+  }
+
+  /* TODO: <section> needs to start from top, otherwise going to a particular
+     #id with long presenter notes will scroll down UGLILY */
+
+  /* TODO: presenter notes should have padding on bottom */
+
+  /* TODO: unconditionally show the first slide in presenter mode, even if
+     there is the aside first */
+
+  html.m-presenter body {
+    overflow-y: scroll;
   }
 
   /* In the presenter view <article> is a container maintaining aspect ratio,
@@ -165,7 +239,8 @@ html:not(.m-presenter) .m-container { width: 100%; }
     right: 0;
     top: 0;
     bottom: 0;
-    min-height: 100%;
+    height: 100%;
+    /*overflow: hidden; /* TODO ugh this hides presenter notes ... also, have on the normal view as well (?) */
   }
   html.m-presenter article > section > h1 {
     position: absolute;
@@ -173,7 +248,7 @@ html:not(.m-presenter) .m-container { width: 100%; }
     right: 0;
     top: 0;
     bottom: 0;
-    min-height: 100%;
+    height: 100%;
     margin: 0;
   }
   html.m-presenter article > section > h1 + h2 {
@@ -193,6 +268,12 @@ html:not(.m-presenter) .m-container { width: 100%; }
     padding-top: 1rem;
     color: #000000;
     font-size: var(--font-size);
+  }
+  html.m-presenter article > section > aside.m-presenter code,
+  html.m-presenter article > section > aside.m-presenter pre {
+    color: #000000;
+    background-color: transparent;
+    font-size: var(--code-font-size);
   }
 }
 

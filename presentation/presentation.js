@@ -27,6 +27,8 @@
 let presenterView = null;
 
 document.onkeydown = function(event) {
+    /* TODO home key for the first slide (what is the first?) */
+
     if(event.key == 'ArrowLeft') {
         let current = document.getElementById(window.location.hash.substr(1));
         if(current) {
