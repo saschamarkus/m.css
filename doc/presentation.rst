@@ -100,6 +100,9 @@ already from other m.css features or e.g. Sphinx, here is a basic
 `overview of the syntax <{filename}/pelican/writing-content.rst>`_. The guide
 is written for the m.css Pelican theme, but most of it applies here as well.
 
+.. TODO: metadata: cover, bundle
+.. TODO: subtitles and section subtitles
+
 `Slide customization`_
 ======================
 

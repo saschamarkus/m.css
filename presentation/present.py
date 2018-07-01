@@ -45,7 +45,10 @@ sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../pe
 import m.htmlsanity
 import m.code
 import m.components
+import m.dot
+import m.images
 import m.math
+import latex2svgextra # TODO: make this part of m.math again
 
 from docutils.parsers import rst
 from docutils.parsers.rst import directives
@@ -72,6 +75,8 @@ default_config = {
     # TODO: mimic pelican with these?
     'DEFAULT_LANG': 'en',
     'M_HTMLSANITY_SMART_QUOTES': True,
+    #'M_MATH_CACHE_FILE': 'm.math.cache', # TODO: make this optional only if plugin exists
+    #'FORMATTED_FIELDS': d,
     'M_EXTRA_FILES': [
         '../css/m-grid.css',
         '../css/m-components.css',
@@ -82,6 +87,15 @@ default_config = {
     'M_CSS_FILES': [
         'https://fonts.googleapis.com/css?family=Source+Code+Pro:400,400i,600%7CSource+Sans+Pro:400,400i,600,600i',
         '../css/m-dark-presentation.css']
+    #'M_EXTRA_FILES': [
+        #'../css/m-grid.css',
+        #'../css/m-components.css',
+        #'../css/m-presentation.css',
+        #'../css/m-theme-light.css',
+        #'../css/pygments-console.css'],
+    #'M_CSS_FILES': [
+        #'https://fonts.googleapis.com/css?family=Source+Code+Pro:400,400i,600%7CSource+Sans+Pro:400,400i,600,600i',
+        #'../css/m-light-presentation.css']
 }
 
 class Presenter:
@@ -89,7 +103,9 @@ class Presenter:
         # TODO: ugh
         m.code.register()
         m.components.register()
+        m.dot.register()
         m.math.register()
+        m.images.register()
 
         rst.directives.register_directive('presenter', PresenterDirective)
 
@@ -115,13 +131,25 @@ class Presenter:
             trim_blocks=True, lstrip_blocks=True, enable_async=True)
         def basename_or_url(path):
             if urllib.parse.urlparse(path).netloc: return path
-            return '/' + os.path.basename(path) # TODO: fix w/o the /
+            return os.path.basename(path)
         self.env.filters['basename_or_url'] = basename_or_url
 
+    # Returns list of files to watch for changes, input is always the first of
+    # them
     def present(self, input, output, config, presenter_view):
         basedir = os.path.dirname(input)
 
+        # TODO ugh
         m.htmlsanity.configure(config)
+        m.dot.configure(config)
+        m.images.configure(config)
+
+        # TODO: configurable
+        math_cache = os.path.join(basedir, "m.math.cache")
+        if os.path.exists(math_cache):
+            latex2svgextra.unpickle_cache(math_cache)
+        else:
+            latex2svgextra.unpickle_cache(None)
 
         logging.debug("reading {}".format(input))
         with open(input, 'r') as f: source = f.read()
@@ -154,18 +182,28 @@ class Presenter:
 
                 metadata[name] = value
 
-        print(self.pub.writer.parts.get('subtitle'))
+        # Add extra bundled files
+        extra_files = []
+        if 'css' in metadata:
+            extra_files += [i.strip() for i in metadata['css'].strip().split('\n')]
+        if 'js' in metadata:
+            extra_files += [i.strip() for i in metadata['js'].strip().split('\n')]
+        if 'bundle' in metadata:
+            extra_files += [i.strip() for i in metadata['bundle'].strip().split('\n')]
+            del metadata['bundle'] # not need to expose this to the template
+        if 'cover' in metadata:
+            extra_files += [metadata['cover']]
 
+        # Add images
+        for image in self.pub.document.traverse(docutils.nodes.image):
+            extra_files += [image['uri']]
+
+        # Set up the page structure for the template
         page = Empty()
         page.title = self.pub.writer.parts.get('title')
         page.subtitle = self.pub.writer.parts.get('subtitle')
         page.content = self.pub.writer.parts.get('body')
-        for key, value in metadata.items():
-            setattr(page, key, value)
-
-        # Add cover image to the extra files to be copied
-        extra_files = []
-        if hasattr(page, 'cover'): extra_files += [page.cover]
+        for key, value in metadata.items(): setattr(page, key, value)
 
         # Write normal view
         template = self.env.get_template('template.html')
@@ -181,19 +219,21 @@ class Presenter:
             rendered = template.render(page=page, PRESENTER_VIEW=True, **config)
 
             presenter_output = os.path.join(output, presenter_view)
-            if not os.path.exists(presenter_output): os.makedirs(presenter_output)
-            output_file = os.path.join(presenter_output, 'index.html')
+            output_file = os.path.join(output, presenter_output)
             logging.debug("writing {}".format(output_file))
             with open(output_file, 'w') as f: f.write(rendered)
 
         # Copy all referenced files
+        files_to_watch = []
         for i in config['M_EXTRA_FILES'] + config['M_CSS_FILES'] + ['presentation.js'] + extra_files:
             # Skip absolute URLs
             if urllib.parse.urlparse(i).netloc: continue
 
-            # If file is found relative to the input file, use that
+            # If file is found relative to the input file, use that. Also add
+            # it to the watched list
             if os.path.exists(os.path.join(basedir, i)):
                 i = os.path.join(basedir, i)
+                files_to_watch += [i]
 
             # Otherwise use path relative to script directory
             else:
@@ -202,30 +242,42 @@ class Presenter:
             logging.debug("copying {} to {}".format(i, output))
             shutil.copy(i, os.path.join(output, os.path.basename(i)))
 
-def file_watcher(path):
-    last_mtime = 0
-    while True:
-        mtime = os.stat(path).st_mtime
-        # Avoid reporting the file has changed right after start
-        if not last_mtime:
-            last_mtime = mtime
-        elif mtime > last_mtime:
-            last_mtime = mtime
-            yield True
-        else:
-            yield False
+        # TODO pickle/unpickle on init only
+        latex2svgextra.pickle_cache(math_cache)
 
-def autoreload(presenter, input, output, config, presenter_view):
-    for updated in file_watcher(input):
-        if updated:
-            logging.info("modified {}, updating".format(input))
-            presenter.present(input, output, config, presenter_view)
-            logging.info("done")
-        else:
-            time.sleep(1)
+        return [input] + files_to_watch
+
+def file_watcher(paths):
+    # TODO: test this
+    logging.info("watching {} paths".format(len(paths)))
+    last_mtime = [0]*len(paths)
+    modified = None
+    while not modified:
+        for i, path in enumerate(paths):
+            mtime = os.stat(path).st_mtime
+            # Avoid reporting the file has modified right after start
+            if not last_mtime[i]:
+                last_mtime[i] = mtime
+            elif mtime > last_mtime[i]:
+                last_mtime[i] = mtime
+                modified = path
+        yield modified
+
+# Paths[0] has to be the input file
+def autoreload(presenter, paths, output, config, presenter_view):
+    input = paths[0]
+    while True:
+        for modified in file_watcher(paths):
+            if modified:
+                logging.info("modified {}, updating".format(os.path.basename(modified)))
+                paths = presenter.present(input, output, config, presenter_view)
+            else:
+                time.sleep(1)
 
 def serve(output, port):
     os.chdir(output)
+    # TODO: too specific, move this away
+    http.server.SimpleHTTPRequestHandler.extensions_map['.wasm'] = 'application/wasm'
     httpd = http.server.HTTPServer(('', port), http.server.SimpleHTTPRequestHandler)
     httpd.serve_forever()
 
@@ -233,7 +285,7 @@ if __name__ == '__main__': # pragma: no cover
     parser = argparse.ArgumentParser()
     parser.add_argument('input', help="input reST file with the presentation")
     parser.add_argument('-o', '--output', help="output directory (relative to input)", default='output/')
-    parser.add_argument('--presenter', nargs='?', const='presenter/', default=None, help="generate a presenter view")
+    parser.add_argument('--presenter', nargs='?', const='presenter.html', default=None, help="generate a presenter view")
     parser.add_argument('--templates', help="template directory", default=default_templates)
     parser.add_argument('-c', '--config', help='config file')
     parser.add_argument('--debug', help="verbose debug output", action='store_true')
@@ -263,12 +315,12 @@ if __name__ == '__main__': # pragma: no cover
     output = os.path.join(os.path.dirname(args.input), args.output)
 
     presenter = Presenter(args.templates)
-    presenter.present(args.input, output, config, args.presenter)
+    paths = presenter.present(args.input, output, config, args.presenter)
 
     if args.autoreload and args.serve:
         logging.info("serving on http://localhost:{} with autoreload ...".format(args.port))
         queue = multiprocessing.Queue()
-        reloader = multiprocessing.Process(target=autoreload, args=(presenter, args.input, output, config, args.presenter))
+        reloader = multiprocessing.Process(target=autoreload, args=(presenter, paths, output, config, args.presenter))
         server = multiprocessing.Process(target=serve, args=(output, args.port))
         reloader.start()
         server.start()
@@ -278,7 +330,7 @@ if __name__ == '__main__': # pragma: no cover
         logging.critical(e)
     elif args.autoreload:
         logging.info("started autoreload...")
-        autoreload(presenter, args.input, output, config, args.presenter)
+        autoreload(presenter, paths, output, config, args.presenter)
     elif args.serve:
         logging.info("serving on http://localhost:{} ...".format(args.port))
         serve(output, args.port)

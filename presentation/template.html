@@ -9,7 +9,7 @@
   {% if page.css %}
   {% set styles = page.css.strip().split('\n') %}
   {% for style in styles %}
-  <link rel="stylesheet" href="{{ style|basename_or_url|e }}" />
+  <link rel="stylesheet" href="{{ style|trim|basename_or_url|e }}" />
   {% endfor %}
   {% endif %}
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,35 +30,42 @@
 <div class="m-row">
 <div class="{% if PRESENTER_VIEW %}m-col-m-10 m-push-m-1{% else %}m-col-m-12 m-nopad{% endif %}">
 <article>
-    {# UGH TODO #}
-  <!--<aside>
+  {% if PRESENTER_VIEW %}
+  <aside>
     <h1>{{ page.title }}</h1>
     <h2>{{ page.subtitle }}</h2>
-    <p>This is a presentation powered by m.css. You have the following options:</p>
     <div class="m-row">
-      <div class="m-col-m-4">
-        <div class="m-button m-primary"><a href="#cover">Start presentation</a></div>
+      <div class="m-col-t-4 m-push-t-2">
+        <div class="m-button m-primary m-fullwidth"><a href="#cover">Start presentation</a></div>
       </div>
-      <div class="m-col-m-4">
-        <div class="m-button m-default"><a href="presenter.html">Show combined view</a></div>
-      </div>
-      <div class="m-col-m-4">
-        <div class="m-button m-success"><a href="presenter.html">Open presenter view</a></div>
+      <div class="m-col-t-4 m-push-t-2">
+        <div class="m-button m-success m-fullwidth"><a href="index.html#cover" onclick="return openMainView(this);">Open main view</a></div>
       </div>
     </div>
-  </aside>-->
+    <aside class="m-presenter">Main view: <span id="main-view-connection-status" class="m-text m-danger">not connected</span></aside>
+  </aside>
+  {% endif %}
   <section id="cover"{% if page.cover %} class="m-presentation-cover" style="background-image: url('{{ page.cover|basename_or_url|e }}');"{% endif %}>
     <h1>{{ page.title }}</h1>
     <h2>{{ page.subtitle }}</h2>
   </section>
 <!-- content -->
 {{ page.content|trim }}
+{% if page.after %}
+{{ page.after|trim }}
+{% endif %}
 <!-- /content -->
 </article>
 </div>
 </div>
 </div>
 <script src="{{ 'presentation.js'|basename_or_url|e }}"></script>
+{% if page.js %}
+{% set scripts = page.js.strip().split('\n') %}
+{% for script in scripts %}
+<script src="{{ script|trim|basename_or_url|e }}"></script>
+{% endfor %}
+{% endif %}
 </body>
 </html>
 {# kate: indent-width 2; #}

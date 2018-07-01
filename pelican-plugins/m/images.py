@@ -241,9 +241,12 @@ class ImageGrid(rst.Directive):
 
         return [grid_node]
 
-def configure(pelicanobj):
+def configure(setting_overrides):
+    settings['M_IMAGES_REQUIRE_ALT_TEXT'] = setting_overrides.get('M_IMAGES_REQUIRE_ALT_TEXT', False)
+
+def configure_pelican(pelicanobj):
+    configure(pelicanobj.settings)
     settings['PATH'] = pelicanobj.settings.get('PATH', 'content')
-    settings['M_IMAGES_REQUIRE_ALT_TEXT'] = pelicanobj.settings.get('M_IMAGES_REQUIRE_ALT_TEXT', False)
 
 def register():
     signals.initialized.connect(configure)

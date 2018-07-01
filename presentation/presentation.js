@@ -24,51 +24,95 @@
 
 "use strict"; /* it summons the Cthulhu in a proper way, they say */
 
-let presenterView = null;
+let mainView = null;
 
-document.onkeydown = function(event) {
-    /* TODO home key for the first slide (what is the first?) */
+function flip(id) {
+    window.location.hash = '#' + id;
 
-    if(event.key == 'ArrowLeft') {
-        let current = document.getElementById(window.location.hash.substr(1));
-        if(current) {
-            let prev = current.previousElementSibling;
-            if(prev && prev.id) {
-                window.location.hash = '#' + prev.id;
+    /* This is the main view, send the change to the presenter window as well */
+    if(window.opener)
+        window.opener.location.hash = '#' + id;
 
-                /* This is the main window, send the change to the presenter
-                   view as well */
-                if(presenterView)
-                    presenterView.location.hash = '#' + prev.id;
-                /* This is the presenter window, send the change to the main
-                   window as well */
-                else if(window.opener)
-                    window.opener.location.hash = '#' + prev.id;
-            }
-        }
-    }
+    /* This is the presenter view */
+    else {
+        /* Send the change to the main view as well */
+        if(mainView && !mainView.closed) {
+            mainView.location.hash = '#' + id;
 
-    if(event.key == 'ArrowRight') {
-        let current = document.getElementById(window.location.hash.substr(1));
-        if(current) {
-            let next = current.nextElementSibling;
-            if(next && next.id) {
-                window.location.hash = '#' + next.id;
-
-                /* This is the main window, send the change to the presenter
-                   view as well */
-                if(presenterView)
-                    presenterView.location.hash = '#' + next.id;
-                /* This is the presenter window, send the change to the main
-                   window as well */
-                else if(window.opener)
-                    window.opener.location.hash = '#' + next.id;
+        /* Otherwise update the connection status */
+        } else {
+            mainView = null;
+            let status = document.getElementById('main-view-connection-status');
+            if(status) {
+                status.innerHTML = 'disconnected';
+                status.className = 'm-text m-danger';
             }
         }
     }
 }
 
-function openPresenterView(link) {
-    presenterView = window.open(link.getAttribute('href'), "presenter-view");
+function flipPrev() {
+    let current = document.getElementById(window.location.hash.substr(1));
+    if(current) {
+        let prev = current.previousElementSibling;
+        if(prev && prev.id && prev.tagName == 'SECTION') flip(prev.id);
+    }
+}
+
+function flipNext() {
+    let current = document.getElementById(window.location.hash.substr(1));
+    if(current) {
+        let next = current.nextElementSibling;
+        if(next && next.id && next.tagName == 'SECTION') flip(next.id);
+    }
+}
+
+document.addEventListener('keydown', function(event) {
+    /* TODO home key for the first slide (what is the first?) */
+
+    /* Just opened, flip to cover */
+    if(!window.location.hash && (event.key == 'ArrowLeft' || event.key == 'ArrowRight'))
+        flip('cover');
+
+    /* Flip to previous */
+    else if(event.key == 'ArrowLeft') flipPrev();
+
+    /* Flip to next */
+    else if(event.key == 'ArrowRight') flipNext();
+});
+
+let touchStart = null;
+
+document.addEventListener('touchstart', function(event) {
+    touchStart = event.touches.length == 1 ? event.touches.item(0).clientX : null;
+});
+
+document.addEventListener('touchend', function(event) {
+    var offset = 100;
+
+    if(touchStart) {
+        let end = event.changedTouches.item(0).clientX;
+
+        /* Just opened, flip to cover */
+        if(!window.location.hash && (end > touchStart + offset || end < touchStart - offset))
+            flip('cover');
+
+        /* Flip to previous */
+        else if(end > touchStart + offset) flipPrev();
+
+        /* FLip to next */
+        else if(end < touchStart - offset) flipNext();
+    }
+
+    touchStart = null;
+});
+
+function openMainView(link) {
+    mainView = window.open(link.getAttribute('href'), "main-view");
+    let status = document.getElementById('main-view-connection-status');
+    if(status) {
+        status.innerHTML = 'connected';
+        status.className = 'm-text m-success';
+    }
     return false;
 }

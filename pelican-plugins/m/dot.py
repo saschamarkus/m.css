@@ -151,14 +151,16 @@ class StrictGraph(Dot):
     def run(self):
         return Dot.run(self, 'strict graph "{}" {{\n{}}}'.format(self.arguments[0], '\n'.join(self.content)))
 
-def configure(pelicanobj):
+def configure(settings):
     global _font, _font_size, _text_src
-    _font = pelicanobj.settings.get('M_DOT_FONT', 'Source Sans Pro')
-    _font_size = pelicanobj.settings.get('M_DOT_FONT_SIZE', 16.0)
+    _font = settings.get('M_DOT_FONT', 'Source Sans Pro')
+    _font_size = settings.get('M_DOT_FONT_SIZE', 16.0)
     _text_src = re.compile(_text_src_src.format(font=_font))
 
+def configure_pelican(pelicanobj): configure(pelicanobj.settings)
+
 def register():
-    pelican.signals.initialized.connect(configure)
+    pelican.signals.initialized.connect(configure_pelican)
     rst.directives.register_directive('digraph', Digraph)
     rst.directives.register_directive('strict-digraph', StrictDigraph)
     rst.directives.register_directive('graph', Graph)

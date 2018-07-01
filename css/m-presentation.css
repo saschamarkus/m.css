@@ -26,7 +26,7 @@
    Background color is handled by the slides themselves, reset it so the
    presenter view has clearly separated slide view on white background. */
 html {
-  font-size: 2.5vw;
+  font-size: 2.49vw; /* 2.5 makes scrollbars on 1080p :/ */
   background-color: transparent;
 }
 
@@ -132,7 +132,7 @@ article > section > nav > a.m-presentation-next { text-align: left; }
 article > section > nav > a.m-presentation-next::before { content: '»'; }
 
 /* By default hide everything except the actual slideshow content */
-article > aside, article > section > aside.m-presenter {
+article > section > aside.m-presenter {
   display: none;
 }
 
@@ -140,7 +140,7 @@ article > aside, article > section > aside.m-presenter {
 @media screen {
   /* Show the first slide or the boot menu when not in presenter mode. It gets
      covered by any other slide after. */
-  html:not(.m-presenter) article > *:first-child {
+  html:not(.m-presenter) article > section:first-child {
     display: block;
     position: absolute;
     left: 0;
@@ -163,6 +163,9 @@ html:not(.m-presenter) .m-container { width: 100%; }
 
 /* Print style. Oh well, the support... */
 @media print {
+  /* Hide boot screen */
+  article > aside { display: none; }
+
   /* Hide navigation, it has no use in a PDF */
   article > section > nav { display: none; }
 
@@ -200,11 +203,13 @@ html:not(.m-presenter) .m-container { width: 100%; }
   */
   html.m-presenter { font-size: 2.381vw; }
 
+  /* TODO: with 1920x1080 there are scrollbars :/ */
+
   @media screen and (min-width: 576px) {
     html.m-presenter { font-size: 13.3333px; } /* 2.381% of 560px */
   }
   @media screen and (min-width: 768px) {
-    html.m-presenter { font-size: 17.8571px; } /* 2.381% of 750px */
+    html.m-presenter { font-size: 14.8809px; } /* 2.381% of 10/12 of 750px */
   }
   @media screen and (min-width: 992px) {
     /* Here the presentation is displayed in the center 10 columns, adjusting
@@ -233,6 +238,11 @@ html:not(.m-presenter) .m-container { width: 100%; }
     padding-top: 56.25%; /* 16:9 */
     background-color: var(--background-color);
   }
+  /* Show the boot screen in presenter mode */
+/*  html.m-presenter article > aside {
+    display: block;
+  }*/
+  html.m-presenter article > aside,
   html.m-presenter article > section {
     position: absolute;
     left: 0;
@@ -241,6 +251,14 @@ html:not(.m-presenter) .m-container { width: 100%; }
     bottom: 0;
     height: 100%;
     /*overflow: hidden; /* TODO ugh this hides presenter notes ... also, have on the normal view as well (?) */
+  }
+  html.m-presenter article > *:first-child {
+/*    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    overflow: hidden;*/
   }
   html.m-presenter article > section > h1 {
     position: absolute;
@@ -260,14 +278,20 @@ html:not(.m-presenter) .m-container { width: 100%; }
     margin: 0;
   }
   /* The presenter notes are stuck right below the <section> element. */
+  html.m-presenter article > aside > aside.m-presenter,
   html.m-presenter article > section > aside.m-presenter {
     display: block;
     position: absolute;
     top: 0;
     margin-top: 56.25%; /* 16:9 */
-    padding-top: 1rem;
     color: #000000;
     font-size: var(--font-size);
+  }
+  html.m-presenter article > aside > aside.m-presenter {
+    padding-top: 1rem;
+  }
+  html.m-presenter article > section > aside.m-presenter {
+    padding-top: 3rem;
   }
   html.m-presenter article > section > aside.m-presenter code,
   html.m-presenter article > section > aside.m-presenter pre {
