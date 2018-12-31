@@ -656,6 +656,30 @@ its XML output. To match the behavior of stock HTML output, enable the
     In order to use the :ini:`XML_NS_MEMB_FILE_SCOPE` option, you need Doxygen
     1.8.15 (released December 2018).
 
+`Include files`_
+----------------
+
+Doxygen by default shows corresponding :cpp:`#include`\ s only for classes. The
+m.css Doxygen theme shows it also for namespaces, free functions, enums,
+typedefs, variables and :cpp:`#define`\ s. The rules are:
+
+-   For classes, :cpp:`#include` information is always shown on the top
+-   If a namespace doesn't contain any inner namespaces or classes and consists
+    only of functions (enums, typedefs, variables) that are all declared in the
+    same header file, the :cpp:`#include` information is shown only globally at
+    the top, similarly to classes
+-   If a namespace contains inner classes/namespaces, or is spread over multiple
+    headers, the :cpp:`#include` information is shown locally for each member
+-   Files don't show any include information, as it is known implicitly
+-   In case of modules (grouped using ``@defgroup``), the :cpp:`#include` info
+    is always shown locally for each member. This includes also :cpp:`#define`\ s.
+
+.. note-warning:: Doxygen patches
+
+    Current stable Doxygen release (1.8.15) doesn't correctly provide location
+    information for function and variable declarations. A fix is submitted in
+    :gh:`doxygen/doxygen#6722`, which is not integrated yet.
+
 `Code highlighting`_
 --------------------
 
