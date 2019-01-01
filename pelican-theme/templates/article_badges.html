@@ -3,7 +3,7 @@
   {% if article.author.image %}
   <img src="{{ article.author.image|expand_link(article)|e }}" alt="{{ article.author|e }}" />
   {% endif %}
-  <h3>About the author</h3>
+  <h3>Über den Autor</h3>
   {{ article.author.badge|expand_links(article)|indent(2) }}
 </div>
 {% endif %}

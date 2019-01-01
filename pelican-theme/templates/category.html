@@ -27,7 +27,7 @@
 
 {% block content_title %}
       <div class="m-info m-note">
-        Showing only posts in <em>{{ category|e }}</em>. <a href="{{ M_BLOG_URL|format_siteurl|e }}">Show all posts.</a>
+        Zeige nur Beiträge in <em>{{ category|e }}</em>. <a href="{{ M_BLOG_URL|format_siteurl|e }}">Zeige alle Beiträge.</a>
       </div>
       {% if category.page and category.page.content and articles_page.number == 1 %}
       <div class="m-block m-warning{% if category.page.image %} m-badge{% endif %}">

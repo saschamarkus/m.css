@@ -1,7 +1,7 @@
 /*
     This file is part of m.css.
 
-    Copyright © 2017, 2018, 2019 Vladimír Vondruš <mosra@centrum.cz>
+    Copyright © 2017, 2018 Vladimír Vondruš <mosra@centrum.cz>
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -33,10 +33,7 @@
   --link-decoration: underline;
   --link-decoration-nav: none;
   --link-decoration-heading: none;
-  --nav-brand-case: lowercase;
-  --nav-menu-case: lowercase;
   --nav-heading-case: uppercase;
-  --nav-categories-case: lowercase;
   --landing-header-case: lowercase;
   --heading-font-weight: normal;
 
@@ -133,7 +130,7 @@
   --info-color: #2e7dc5;
   --info-link-active-color: #c6ddf2;
   --info-filled-color: #f4f8fc;
-  --info-filled-background-color: #4c93d3;
+  --info-filled-background-color: #cb4b16;
   --info-filled-link-color: #c6ddf2;
   --info-filled-link-active-color: #dbeaf7;
 
