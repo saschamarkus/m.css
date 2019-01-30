@@ -44,8 +44,8 @@
   --background-color: #ffffff;
   --color: #000000;
   --line-color: #f7e3db;
-  --link-color: #ea7944;
-  --link-active-color: #cb4b16;
+  --link-color: #4267b2;
+  --link-active-color: #4267b2;
   --mark-color: #4c93d3;
   --mark-background-color: #e6e69c;
   --code-color: #5b5b5b;
@@ -62,7 +62,7 @@
   --header-background-color-landing: rgba(255, 255, 255, 0.75);
   --header-background-color-jumbo: rgba(255, 255, 255, 0.25);
   --header-link-color: #000000;
-  --header-link-active-color: #cb4b16;
+  --header-link-active-color: #4267b2;
   --header-link-current-color: #ea7944;
   --header-link-active-background-color: #ffffff;
   --header-link-active-background-color: rgba(255, 255, 255, 0.5);
@@ -80,12 +80,12 @@
   /* Article */
   --article-header-color: #7a7a7a;
   --article-footer-color: #969696;
-  --article-heading-color: #cb4b16;
+  --article-heading-color: #4267b2;
   --article-heading-active-color: #802f0e;
 
   /* Right navigation panel */
   --navpanel-link-color: #292929;
-  --navpanel-link-active-color: #cb4b16;
+  --navpanel-link-active-color: #4267b2;
 
   /* Plots */
   --plot-background-color: #fbf0ec;
@@ -93,13 +93,13 @@
 
   /* Colored components */
   --default-color: #000000;
-  --default-link-active-color: #cb4b16;
+  --default-link-active-color: #4267b2;
   --default-filled-color: #000000;
   --default-filled-background-color: #fbf0ec;
   --default-filled-link-color: #ea7944;
-  --default-filled-link-active-color: #cb4b16;
+  --default-filled-link-active-color: #4267b2;
 
-  --primary-color: #cb4b16;
+  --primary-color: #4267b2;
   --primary-link-active-color: #000000;
   --primary-filled-color: #fbe4d9;
   --primary-filled-background-color: #ef9069;
@@ -130,7 +130,7 @@
   --info-color: #2e7dc5;
   --info-link-active-color: #c6ddf2;
   --info-filled-color: #f4f8fc;
-  --info-filled-background-color: #cb4b16;
+  --info-filled-background-color: #4267b2;
   --info-filled-link-color: #c6ddf2;
   --info-filled-link-active-color: #dbeaf7;
 

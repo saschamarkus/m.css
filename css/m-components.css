@@ -72,8 +72,8 @@ blockquote {
 }
 hr {
   height: 12px; 
-  border: 0; 
-  box-shadow: inset 0 12px 12px -12px rgba(234, 121, 68, 0.9);
+  border: 1; 
+  box-shadow: inset 0 12px 12px -12px rgb(80, 114, 183);
   border-radius: 5px;
 }
 blockquote {
