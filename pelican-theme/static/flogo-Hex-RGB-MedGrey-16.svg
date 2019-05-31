@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 58 58"
+   version="1.1"
+   sodipodi:docname="flogo-Hex-RGB-MedGrey-16.svg"
+   inkscape:version="0.92.1 r15371">
+  <metadata
+     id="metadata14">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>flogo-Hex-RGB-MedGrey-58</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1465"
+     inkscape:window-height="793"
+     id="namedview12"
+     showgrid="false"
+     inkscape:zoom="9.0172414"
+     inkscape:cx="29"
+     inkscape:cy="29"
+     inkscape:window-x="0"
+     inkscape:window-y="55"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="Layer_1" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">.cls-1{fill:#898f9c;}.cls-2{fill:#fff;}</style>
+  </defs>
+  <title
+     id="title6">flogo-Hex-RGB-MedGrey-58</title>
+  <path
+     class="cls-1"
+     d="M 45.013795,11 H 12.986208 a 1.9862071,1.9862071 0 0 0 -1.986206,1.986205 V 45.013793 A 1.9862071,1.9862071 0 0 0 12.986208,47 H 30.24138 V 33.07793 h -4.686207 v -5.449654 h 4.686207 v -4.009655 c 0,-4.648966 2.842758,-7.181383 6.988967,-7.181383 a 39.848277,39.848277 0 0 1 4.183447,0.211028 v 4.860001 h -2.855171 c -2.259312,0 -2.700001,1.067587 -2.700001,2.644139 v 3.469655 h 5.400001 l -0.701379,5.449654 h -4.729655 v 13.928279 h 9.186206 a 1.9862071,1.9862071 0 0 0 1.986207,-1.986209 V 12.986205 A 1.9862071,1.9862071 0 0 0 45.013795,11 Z"
+     id="path8"
+     inkscape:connector-curvature="0"
+     style="fill:#898f9c;stroke-width:1" />
+  <path
+     id="f"
+     class="cls-2"
+     d="M 35.827589,47 V 33.07793 h 4.698619 l 0.701381,-5.449654 h -5.4 v -3.469655 c 0,-1.576553 0.440689,-2.64414 2.7,-2.64414 h 2.886205 v -4.866207 a 39.848277,39.848277 0 0 0 -4.189656,-0.211028 c -4.152412,0 -6.982756,2.532416 -6.982756,7.181381 v 4.009654 h -4.686209 v 5.449657 h 4.686209 v 13.922069 z"
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff;stroke-width:1" />
+</svg>

@@ -357,6 +357,12 @@ h1 {
 h2, h3, h4, h5, h6 {
   margin-bottom: 0.5rem;
 }
+img {
+  width: 90%;
+}
+img.logo {
+  width: auto;
+}
 p, ul, ol, dl {
   margin-top: 0;
 }
@@ -383,11 +389,13 @@ blockquote {
   border-left-width: 0.25rem;
 }
 hr {
-  width: 75%;
-  border-width: 0.0625rem;
-  border-style: solid;
+  height: 1px;
+  box-shadow: 1px 1px 0px 1px #475674;
+  border-radius: 5px;
+  border: 0px;
+  background-color: #475674;
 }
-blockquote, hr {
+blockquote {
   border-color: #405363;
 }
 pre {
@@ -1722,6 +1730,38 @@ li:last-child > div.m-graph:last-child, li:last-child > div.m-graph.m-nopadb,
 li:last-child > div.m-plot:last-child, li:last-child > div.m-plot.m-nopadb {
   margin-bottom: 0;
 }
+label {
+  display: inline-block;
+  background:url(/static/details.svg) no-repeat left center;  
+  margin: 0 2px 0;
+  width: 16px;
+}
+label:hover {
+  display: inline-block;
+  cursor: help;
+}
+input {
+  display: inline;
+  position: absolute;
+  left: -999em;
+}
+.hide {
+  display: none;
+  width: 50%;
+  border: 1px solid #000;
+  max-height: 99em;
+  opacity: 0;
+  height: auto;
+  overflow: hidden;
+  transition: opacity 1.5s linear, max-height 1.5s linear;
+}
+input[type="checkbox"]:checked + span {
+  opacity: 1;
+  display: inline;
+  max-height: 0;
+  background-color: #00257133;
+  border: none;
+}
 
 body > header > nav {
   width: 100%;
@@ -1771,7 +1811,7 @@ body > header > nav a {
 }
 body > header > nav #m-navbar-brand, body > header > nav a#m-navbar-show, body > header > nav a#m-navbar-hide {
   font-weight: 600;
-  font-size: 1.125rem;
+  font-size: 3.0rem;
   padding-left: 1rem;
   padding-right: 1rem;
 }

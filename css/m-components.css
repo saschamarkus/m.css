@@ -44,6 +44,12 @@ h1 {
 h2, h3, h4, h5, h6 {
   margin-bottom: 0.5rem;
 }
+img {
+  width: 90%;
+}
+img.logo {
+  width: auto;
+}
 p, ul, ol, dl {
   margin-top: 0;
 }
@@ -71,10 +77,11 @@ blockquote {
   border-left-width: 0.25rem;
 }
 hr {
-  height: 12px; 
-  border: 1; 
-  box-shadow: inset 0 12px 12px -12px rgb(80, 114, 183);
+  height: 1px;
+  box-shadow: 1px 1px 0px 1px #475674;
   border-radius: 5px;
+  border: 0px;
+  background-color: #475674;
 }
 blockquote {
   border-color: var(--line-color);
@@ -116,6 +123,26 @@ a:hover, a:focus, a:active {
   color: var(--link-active-color);
 }
 a img { border: 0; } /* Why you so special, IE?! */
+/*
+a[href*="facebook.com/"] {
+  background:url(/static/flogo-Hex-RGB-MedGrey-16.svg) no-repeat left center;
+  padding-left:16px;
+}
+*/
+/*
+@media (hover: hover) {
+a[href*="facebook.com/"] {
+  background:url(/static/flogo-Hex-RGB-MedGrey-16.svg) no-repeat left center;
+  opacity: 0.2;
+  padding-left:16px;
+}
+a[href*="facebook.com/"]:hover {
+  background:url(/static/flogo-Hex-RGB-MedGrey-16.svg) no-repeat left center;
+  opacity: 1.0;
+  padding-left:16px;
+}
+}
+*/
 svg a { cursor: pointer; } /* And why YOU, CHROME?! */
 mark {
   padding: 0.0625rem;
@@ -1514,4 +1541,36 @@ li:last-child > div.m-math:last-child, li:last-child > div.m-math.m-nopadb,
 li:last-child > div.m-graph:last-child, li:last-child > div.m-graph.m-nopadb,
 li:last-child > div.m-plot:last-child, li:last-child > div.m-plot.m-nopadb {
   margin-bottom: 0;
+}
+label {
+  display: inline-block;
+  background:url(/static/details.svg) no-repeat left center;  
+  margin: 0 2px 0;
+  width: 16px;
+}
+label:hover {
+  display: inline-block;
+  cursor: help;
+}
+input {
+  display: inline;
+  position: absolute;
+  left: -999em;
+}
+.hide {
+  display: none;
+  width: 50%;
+  border: 1px solid #000;
+  max-height: 99em;
+  opacity: 0;
+  height: auto;
+  overflow: hidden;
+  transition: opacity 1.5s linear, max-height 1.5s linear;
+}
+input[type="checkbox"]:checked + span {
+  opacity: 1;
+  display: inline;
+  max-height: 0;
+  background-color: #00257133;
+  border: none;
 }

@@ -357,6 +357,12 @@ h1 {
 h2, h3, h4, h5, h6 {
   margin-bottom: 0.5rem;
 }
+img {
+  width: 90%;
+}
+img.logo {
+  width: auto;
+}
 p, ul, ol, dl {
   margin-top: 0;
 }
@@ -367,7 +373,7 @@ ul ol, ul ul, ol ol, ol ul {
   margin-bottom: 0;
 }
 main p {
-  text-indent: 1.5rem;
+  text-indent: 0rem;
   text-align: justify;
 }
 main p.m-noindent, li > p, dd > p, table.m-table td > p {
@@ -383,12 +389,14 @@ blockquote {
   border-left-width: 0.25rem;
 }
 hr {
-  width: 75%;
-  border-width: 0.0625rem;
-  border-style: solid;
+  height: 1px;
+  box-shadow: 1px 1px 0px 1px #475674;
+  border-radius: 5px;
+  border: 0px;
+  background-color: #475674;
 }
-blockquote, hr {
-  border-color: #f7e3db;
+blockquote {
+  border-color: #475674;
 }
 pre {
   font-family: 'Source Code Pro', monospace, monospace, monospace;
@@ -416,13 +424,13 @@ sub, sup {
 sup { top: -0.35rem; }
 sub { bottom: -0.2rem; }
 a {
-  color: #ea7944;
+  color: #475674;
 }
 a.m-flat {
   text-decoration: none;
 }
 a:hover, a:focus, a:active {
-  color: #cb4b16;
+  color: #475674;
 }
 a img { border: 0; }
 svg a { cursor: pointer; }
@@ -528,10 +536,10 @@ ul[class*='m-block-dot-'] li:not(:last-child)::after, ol[class*='m-block-dot-'] 
 p.m-poem {
   text-indent: 0;
   text-align: left;
-  margin-left: 1.5rem;
+  margin-left: 0rem;
 }
 p.m-transition {
-  color: #f7e3db;
+  color: #475674;
   text-indent: 0;
   text-align: center;
   font-size: 2rem;
@@ -565,7 +573,7 @@ dl.m-diary dd {
   border-style: solid;
   border-width: 0.125rem;
   border-radius: 0.2rem;
-  border-color: #f7e3db;
+  border-color: #475674;
   padding: 0.875rem;
 }
 .m-block {
@@ -573,7 +581,7 @@ dl.m-diary dd {
   border-width: 0.0625rem;
   border-left-width: 0.25rem;
   border-radius: 0.2rem;
-  border-color: #f7e3db;
+  border-color: #475674;
   padding: 0.9375rem 0.9375rem 0.9375rem 0.75rem;
 }
 .m-block.m-badge::after {
@@ -644,7 +652,7 @@ div.m-scroll > table.m-table:last-child {
   margin-bottom: 0.0625rem;
 }
 table.m-table:not(.m-flat) tbody tr:hover {
-  background-color: #f7e3db;
+  background-color: #475674;
 }
 table.m-table th, table.m-table td {
   vertical-align: top;
@@ -653,7 +661,7 @@ table.m-table th, table.m-table td {
   border-left-width: 0;
   border-right-width: 0;
   border-bottom-width: 0;
-  border-color: #f7e3db;
+  border-color: #475674;
 }
 table.m-table caption {
   padding-bottom: 0.5rem;
@@ -752,7 +760,7 @@ figure.m-figure:before {
   border-style: solid;
   border-width: 0.125rem;
   border-radius: 0.2rem;
-  border-color: #f7e3db;
+  border-color: #475674;
 }
 figure.m-figure.m-flat:before {
   border-color: transparent;
@@ -1118,7 +1126,7 @@ div.m-button a svg.m-math { fill: #ffffff; }
 div.m-button.m-flat a svg.m-math { fill: #000000; }
 div.m-button.m-flat a:hover svg.m-math, div.m-button.m-default a:focus svg.m-math,
 div.m-button.m-default a:active svg.m-math {
-  fill: #cb4b16;
+  fill: #475674;
 }
 .m-graph { font-size: 14px; }
 div.m-plot svg, div.m-graph svg {
@@ -1154,21 +1162,21 @@ figure.m-figure > svg.m-graph:first-child {
 }
 figure.m-figure:not(.m-flat) > svg.m-math:first-child,
 figure.m-figure:not(.m-flat) > svg.m-graph:first-child {
-  background-color: #f7e3db;
+  background-color: #475674;
 }
-.m-block.m-default { border-left-color: #f7e3db; }
+.m-block.m-default { border-left-color: #475674; }
 .m-block.m-default h3, .m-block.m-default h4, .m-block.m-default h5, .m-block.m-default h6,
 .m-text.m-default, .m-label.m-flat.m-default {
   color: #000000;
 }
 .m-block.m-default h3 a, .m-block.m-default h4 a, .m-block.m-default h5 a, .m-block.m-default h6 a {
-  color: #ea7944;
+  color: #475674;
 }
-.m-block.m-primary { border-left-color: #cb4b16; }
+.m-block.m-primary { border-left-color: #4267b2; }
 .m-block.m-primary h3, .m-block.m-primary h4, .m-block.m-primary h5, .m-block.m-primary h6,
 .m-block.m-primary h3 a, .m-block.m-primary h4 a, .m-block.m-primary h5 a, .m-block.m-primary h6 a,
 .m-text.m-primary, .m-label.m-flat.m-primary {
-  color: #cb4b16;
+  color: #4267b2;
 }
 .m-block.m-success { border-left-color: #31c25d; }
 .m-block.m-success h3, .m-block.m-success h4, .m-block.m-success h5, .m-block.m-success h6,
@@ -1211,7 +1219,7 @@ figure.m-figure:not(.m-flat) > svg.m-graph:first-child {
 .m-block.m-default h4 a:hover, .m-block.m-default h4 a:focus, .m-block.m-default h4 a:active,
 .m-block.m-default h5 a:hover, .m-block.m-default h5 a:focus, .m-block.m-default h5 a:active,
 .m-block.m-default h6 a:hover, .m-block.m-default h6 a:focus, .m-block.m-default h6 a:active {
-  color: #cb4b16;
+  color: #4267b2;
 }
 .m-block.m-primary h3 a:hover, .m-block.m-primary h3 a:focus, .m-block.m-primary h3 a:active,
 .m-block.m-primary h4 a:hover, .m-block.m-primary h4 a:focus, .m-block.m-primary h4 a:active,
@@ -1246,17 +1254,17 @@ figure.m-figure:not(.m-flat) > svg.m-graph:first-child {
 div.m-button a, .m-label { color: #ffffff; }
 div.m-button.m-flat a { color: #000000; }
 div.m-button.m-flat a:hover, div.m-button.m-default a:focus, div.m-button.m-default a:active {
-  color: #cb4b16;
+  color: #475674;
 }
 div.m-button.m-default a, .m-label:not(.m-flat).m-default { background-color: #000000; }
-div.m-button.m-primary a, .m-label:not(.m-flat).m-primary { background-color: #cb4b16; }
+div.m-button.m-primary a, .m-label:not(.m-flat).m-primary { background-color: #4267b2; }
 div.m-button.m-success a, .m-label:not(.m-flat).m-success { background-color: #31c25d; }
 div.m-button.m-warning a, .m-label:not(.m-flat).m-warning { background-color: #c7cf2f; }
 div.m-button.m-danger a, .m-label:not(.m-flat).m-danger { background-color: #f60000; }
 div.m-button.m-info a, .m-label:not(.m-flat).m-info { background-color: #2e7dc5; }
 div.m-button.m-dim a, .m-label:not(.m-flat).m-dim { background-color: #bdbdbd; }
 div.m-button.m-default a:hover, div.m-button.m-default a:focus, div.m-button.m-default a:active {
-  background-color: #cb4b16;
+  background-color: #4267b2;
 }
 div.m-button.m-primary a:hover, div.m-button.m-primary a:focus, div.m-button.m-primary a:active {
   background-color: #000000;
@@ -1291,7 +1299,7 @@ table.m-table tr.m-default th a:focus, table.m-table th.m-default a:focus,
 .m-note.m-default a:active,
 table.m-table tr.m-default td a:active, table.m-table td.m-default a:active,
 table.m-table tr.m-default th a:active, table.m-table th.m-default a:active {
-  color: #cb4b16;
+  color: #4267b2;
 }
 .m-note.m-primary a,
 table.m-table tr.m-primary td a, table.m-table td.m-primary a,
@@ -1387,7 +1395,7 @@ table.m-table tr.m-danger th a:active, table.m-table th.m-danger a:active {
 .m-note.m-info,
 table.m-table tr.m-info td, table.m-table td.m-info,
 table.m-table tr.m-info th, table.m-table th.m-info {
-  background-color: #4c93d3;
+  background-color: #4267b2;
   color: #f4f8fc;
 }
 .m-note.m-info a,
@@ -1431,14 +1439,14 @@ table.m-table tr.m-dim th a:active, table.m-table th.m-dim a:active {
 figure.m-figure.m-default:before { border-color: #fbf0ec; }
 figure.m-figure.m-default figcaption { color: #000000; }
 figure.m-figure.m-primary:before { border-color: #ef9069; }
-figure.m-figure.m-primary figcaption { color: #cb4b16; }
+figure.m-figure.m-primary figcaption { color: #4267b2; }
 figure.m-figure.m-success:before { border-color: #4dd376; }
 figure.m-figure.m-success figcaption { color: #31c25d; }
 figure.m-figure.m-warning:before { border-color: #d1d34d; }
 figure.m-figure.m-warning figcaption { color: #c7cf2f; }
 figure.m-figure.m-danger:before { border-color: #e23e3e; }
 figure.m-figure.m-danger figcaption { color: #f60000; }
-figure.m-figure.m-info:before { border-color: #4c93d3; }
+figure.m-figure.m-info:before { border-color: #4267b2; }
 figure.m-figure.m-info figcaption { color: #2e7dc5; }
 figure.m-figure.m-dim:before { border-color: #f1f1f1; }
 figure.m-figure.m-dim { color: #bdbdbd; }
@@ -1480,14 +1488,14 @@ div.m-plot svg .m-bar.m-primary,
 .m-graph.m-primary g.m-node:not(.m-flat) polygon,
 .m-graph.m-primary g.m-edge text,
 .m-graph.m-primary g.m-node.m-flat text {
-  fill: #cb4b16;
+  fill: #4267b2;
 }
 .m-graph.m-primary g.m-edge polygon,
 .m-graph.m-primary g.m-edge path,
 .m-graph.m-primary g.m-node ellipse,
 .m-graph.m-primary g.m-node polygon,
 .m-graph.m-primary g.m-node polyline {
-  stroke: #cb4b16;
+  stroke: #4267b2;
 }
 .m-math.m-success, .m-math g.m-success, .m-math rect.m-success,
 div.m-plot svg .m-bar.m-success,
@@ -1588,14 +1596,14 @@ div.m-plot svg .m-bar.m-dim,
 .m-graph g.m-node.m-primary:not(.m-flat) polygon,
 .m-graph g.m-edge.m-primary text,
 .m-graph g.m-node.m-primary.m-flat text {
-  fill: #cb4b16;
+  fill: #4267b2;
 }
 .m-graph g.m-edge.m-primary polygon,
 .m-graph g.m-edge.m-primary path,
 .m-graph g.m-node.m-primary ellipse,
 .m-graph g.m-node.m-primary polygon,
 .m-graph g.m-node.m-primary polyline {
-  stroke: #cb4b16;
+  stroke: #4267b2;
 }
 .m-graph g.m-edge.m-success polygon,
 .m-graph g.m-node.m-success:not(.m-flat) ellipse,
@@ -1722,6 +1730,38 @@ li:last-child > div.m-graph:last-child, li:last-child > div.m-graph.m-nopadb,
 li:last-child > div.m-plot:last-child, li:last-child > div.m-plot.m-nopadb {
   margin-bottom: 0;
 }
+label {
+  display: inline-block;
+  background:url(/static/details.svg) no-repeat left center;  
+  margin: 0 2px 0;
+  width: 16px;
+}
+label:hover {
+  display: inline-block;
+  cursor: help;
+}
+input {
+  display: inline;
+  position: absolute;
+  left: -999em;
+}
+.hide {
+  display: none;
+  width: 50%;
+  border: 1px solid #000;
+  max-height: 99em;
+  opacity: 0;
+  height: auto;
+  overflow: hidden;
+  transition: opacity 1.5s linear, max-height 1.5s linear;
+}
+input[type="checkbox"]:checked + span {
+  opacity: 1;
+  display: inline;
+  max-height: 0;
+  background-color: #00257133;
+  border: none;
+}
 
 body > header > nav {
   width: 100%;
@@ -1763,7 +1803,7 @@ body > header > nav {
 }
 body > header > nav a {
   text-decoration: none;
-  text-transform: lowercase;
+  text-transform: var(--nav-menu-case);
   display: inline-block;
   vertical-align: middle;
   line-height: 2.75rem;
@@ -1771,12 +1811,12 @@ body > header > nav a {
 }
 body > header > nav #m-navbar-brand, body > header > nav a#m-navbar-show, body > header > nav a#m-navbar-hide {
   font-weight: normal;
-  font-size: 1.125rem;
+  font-size: 3.0rem;
   padding-left: 1rem;
   padding-right: 1rem;
 }
 body > header > nav a#m-navbar-brand, body > header > nav #m-navbar-brand a {
-  text-transform: lowercase;
+  text-transform: var(--nav-brand-case);
 }
 body > header > nav #m-navbar-brand a {
   padding-left: 0;
@@ -1825,15 +1865,15 @@ body > header > nav .m-row > [class*='m-col-'] {
   padding-bottom: 0;
 }
 body > header > nav a:hover, body > header > nav a:focus, body > header > nav a:active {
-  color: #cb4b16;
+  color: #475674;
 }
 body > header > nav #m-navbar-collapse li:hover {
-  border-color: #cb4b16;
+  border-color: #475674;
 }
 body > header > nav #m-navbar-collapse li a:hover,
 body > header > nav #m-navbar-collapse li a:focus,
 body > header > nav #m-navbar-collapse li a:active {
-  border-color: #cb4b16;
+  border-color: #475674;
   background-color: rgba(255, 255, 255, 0.5);
 }
 body > header > nav.m-navbar-landing #m-navbar-collapse li a:hover,
@@ -1929,7 +1969,7 @@ body > footer > nav ul {
 }
 body > footer > nav a {
   text-decoration: none;
-  text-transform: lowercase;
+  text-transform: var(--nav-menu-case);
   color: #191919;
 }
 body > footer > nav a:hover, body > footer > nav a:focus, body > footer > nav a:active {
@@ -1947,7 +1987,7 @@ article h1 .m-breadcrumb {
   font-weight: normal;
 }
 article h1 .m-breadcrumb a {
-  color: #cb4b16;
+  color: #4267b2;
 }
 article h1 .m-breadcrumb a:hover, article h1 a:focus, article h1 a:active {
   color: #802f0e;
@@ -1962,7 +2002,7 @@ article section > h3, article section > h3 a,
 article section > h4, article section > h4 a,
 article section > h5, article section > h5 a,
 article section > h6, article section > h6 a {
-  color: #cb4b16;
+  color: #4267b2;
 }
 article h1 a:hover, article > header h1 a:hover, article > header h1 a:focus, article > header h1 a:active,
 article section > h2 a:hover, article section > h2 a:focus, article section > h2 a:active,
@@ -1983,7 +2023,7 @@ article > header .m-date {
   white-space: nowrap;
   border-right-style: solid;
   border-right-width: 0.125rem;
-  border-color: #cb4b16;
+  border-color: #4267b2;
   padding-right: 0.75rem;
   margin-top: -0.1rem;
   margin-right: 0.75rem;
@@ -2018,7 +2058,7 @@ article section:target {
   border-left-style: solid;
   border-left-width: 0.25rem;
   padding-left: 0.75rem;
-  border-color: #cb4b16;
+  border-color: #4267b2;
 }
 article h1 a, article > header h1 a, article section > h2 a, article section > h3 a,
 article section > h4 a, article section > h5 a, article section > h6 a {
@@ -2042,7 +2082,7 @@ article section > h4 a, article section > h5 a, article section > h6 a {
 #m-landing-cover h1 {
   font-size: 2.8rem;
   margin-top: -0.5rem;
-  padding-left: 1.5rem;
+  padding-left: 0rem;
   padding-bottom: 1rem;
   text-transform: lowercase;
 }
@@ -2104,7 +2144,7 @@ article#m-jumbo.m-inverted > header a:hover, article#m-jumbo.m-inverted > header
   text-transform: uppercase;
 }
 .m-landing-news h3 a:hover, .m-landing-news h3 a:hover, .m-landing-news h3 a:focus, .m-landing-news h3 a:active {
-  color: #cb4b16;
+  color: #4267b2;
 }
 .m-landing-news time {
   display: inline-block;
@@ -2123,7 +2163,7 @@ nav.m-navpanel h3 {
   font-weight: normal;
 }
 nav.m-navpanel ol {
-  text-transform: lowercase;
+  text-transform: var(--nav-categories-case);
 }
 nav.m-navpanel ol, nav.m-navpanel ul {
   list-style-type: none;
@@ -2134,7 +2174,7 @@ nav.m-navpanel a {
   text-decoration: none;
 }
 nav.m-navpanel a:hover, nav.m-navpanel a:focus, nav.m-navpanel a:active {
-  color: #cb4b16;
+  color: #4267b2;
 }
 ul.m-tagcloud li { display: inline; }
 ul.m-tagcloud li.m-tag-1 { font-size: 0.75rem; }
@@ -2353,7 +2393,7 @@ article:last-child, article section:last-child { margin-bottom: 0; }
 .m-container-inflatable section:target [class*='m-right-'] > figure.m-console-figure::before,
 .m-container-inflatable section:target .m-container-inflatable > figure.m-code-figure::before,
 .m-container-inflatable section:target .m-container-inflatable > figure.m-console-figure::before {
-  border-left-color: #f7e3db;
+  border-left-color: #475674;
 }
 @media screen and (min-width: 576px) {
   .m-container-inflatable section:target .m-center-s > figure.m-code-figure::before,
@@ -2388,13 +2428,13 @@ article:last-child, article section:last-child { margin-bottom: 0; }
 .m-container-inflatable section:target pre,
 .m-container-inflatable section:target figure.m-code-figure > pre:first-child,
 .m-container-inflatable section:target figure.m-console-figure > pre:first-child {
-  border-color: #f7e3db;
+  border-color: #475674;
 }
 .m-container-inflatable section:target .m-note.m-default {
-  border-color: #f7e3db;
+  border-color: #475674;
 }
 .m-container-inflatable section:target .m-note.m-primary  {
-  border-color: #cb4b16;
+  border-color: #4267b2;
 }
 .m-container-inflatable section:target .m-note.m-success {
   border-color: #31c25d;
@@ -2459,7 +2499,7 @@ ul.m-dox li.m-dox-collapsible > a:first-child:active {
 a.m-dox-self,
 ul.m-dox li.m-dox-expansible > a:first-child:before,
 ul.m-dox li.m-dox-collapsible > a:first-child:before {
-  color: #cb4b16;
+  color: #4267b2;
 }
 a.m-dox-self:hover, a.m-dox-self:focus, a.m-dox-self:active,
 ul.m-dox li.m-dox-expansible > a:first-child:hover::before,
@@ -2490,7 +2530,7 @@ ul.m-dox {
   list-style: none;
   margin-left:  1.0375rem;
   padding-left: 0.9rem;
-  border-left-color: #f7e3db;
+  border-left-color: #475674;
   border-left-width: 0.0625rem;
   border-left-style: solid;
 }
@@ -2600,7 +2640,7 @@ article section.m-dox-details:target > div {
 .m-container-inflatable section.m-dox-details:target > div::before,
 .m-container-inflatable section-dox-details:target section > div.m::before {
   border-left-width: 0.25rem;
-  border-left-color: #cb4b16;
+  border-left-color: #4267b2;
 }
 a.m-dox-search-icon {
   padding-left: 1rem;
@@ -2613,7 +2653,7 @@ body > header > nav #m-navbar-collapse a.m-dox-search-icon svg {
   vertical-align: -5%;
 }
 a.m-dox-search-icon:focus svg, a.m-dox-search-icon:hover svg, a.m-dox-search-icon:active svg {
-  fill: #cb4b16;
+  fill: #475674;
 }
 .m-dox-search {
   display: none;
@@ -2699,7 +2739,7 @@ a.m-dox-search-icon:focus svg, a.m-dox-search-icon:hover svg, a.m-dox-search-ico
   background-color: #fbf0ec;
 }
 .m-dox-search-typed {
-  color: #ea7944;
+  color: #475674;
 }
 .m-dox-search input[type="search"] { -webkit-appearance: textfield; }
 .m-dox-search input[type="search"]::-webkit-search-decoration,

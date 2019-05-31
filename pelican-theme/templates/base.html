@@ -4,17 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="referrer" content="never">
   <meta name="referrer" content="no-referrer">
+  <meta name="keywords" content="Veranstaltung, Konzert, Jazz, Jam Session, Punk, Pop, Lesung, Fotograf, Facebook, Instagram, Twitter, Bildende Kunst, Ausstellung, Vernissage, Theater, Ballett, Oper, Flaneur, Saarland, Saarbrücken, Nauwieser Viertel, Mainzer Quartier">
   <title>{% block title %}{{ SITENAME|e }}{% endblock title %}</title>
+<style>
+/* libre-baskerville-regular - latin-ext_latin */
+@font-face {
+font-family: 'Libre Baskerville';
+font-style: normal;
+font-weight: 400;
+src: url('/static/fonts/libre-baskerville-v5-latin-ext_latin-regular.eot'); /* IE9 Compat Modes */
+src: local('Libre Baskerville'), local('LibreBaskerville-Regular'),
+url('/static/fonts/libre-baskerville-v5-latin-ext_latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+url('/static/fonts/libre-baskerville-v5-latin-ext_latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+url('/static/fonts/libre-baskerville-v5-latin-ext_latin-regular.woff') format('woff'), /* Modern Browsers */
+url('/static/fonts/libre-baskerville-v5-latin-ext_latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+url('/static/fonts/libre-baskerville-v5-latin-ext_latin-regular.svg#LibreBaskerville') format('svg'); /* Legacy iOS */
+}
+
+/* libre-baskerville-italic - latin-ext_latin */
+@font-face {
+font-family: 'Libre Baskerville';
+font-style: italic;
+font-weight: 400;
+src: url('/static/fonts/libre-baskerville-v5-latin-ext_latin-italic.eot'); /* IE9 Compat Modes */
+src: local('Libre Baskerville Italic'), local('LibreBaskerville-Italic'),
+url('/static/fonts/libre-baskerville-v5-latin-ext_latin-italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+url('/static/fonts/libre-baskerville-v5-latin-ext_latin-italic.woff2') format('woff2'), /* Super Modern Browsers */
+url('/static/fonts/libre-baskerville-v5-latin-ext_latin-italic.woff') format('woff'), /* Modern Browsers */
+url('/static/fonts/libre-baskerville-v5-latin-ext_latin-italic.ttf') format('truetype'), /* Safari, Android, iOS */
+url('/static/fonts/libre-baskerville-v5-latin-ext_latin-italic.svg#LibreBaskerville') format('svg'); /* Legacy iOS */
+}
+</style>
   {% for href in M_CSS_FILES %}
   <link rel="stylesheet" href="{{ href|format_siteurl|e }}" />
   {% endfor %}
   {% block head_links %}
   {% endblock head_links %}
-  {% if FEED_ALL_ATOM_URL %}
-  <link href="{{ FEED_ALL_ATOM_URL|format_siteurl|e }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME|e }}" />
-  {% elif FEED_ALL_ATOM %}
-  <link href="{{ FEED_ALL_ATOM|format_siteurl|e }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME|e }}" />
-  {% endif %}
   {% if category %}
   {% if CATEGORY_FEED_ATOM_URL %}
   <link href="{{ CATEGORY_FEED_ATOM_URL.format(slug=category.slug)|format_siteurl }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME|e }} | {{ category|e }}" />
@@ -46,7 +71,7 @@
   <div class="m-container">
     <div class="m-row">
       <a href="{{ SITEURL }}/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m{% if page and page.landing and page.cover and page.hide_navbar_brand == 'True' %} m-navbar-brand-hidden{% endif %}">
-        {%- if M_SITE_LOGO %}<img src="{{ M_SITE_LOGO|e }}" />{% endif -%}
+        {%- if M_SITE_LOGO %}<img class="logo" alt="Logo: Der Flaneur - Spazierstock und Kamera" src="{{ M_SITE_LOGO|e }}" />{% endif -%}
         {{- (M_SITE_LOGO_TEXT or SITENAME)|e -}}
       </a>
       {% if M_LINKS_NAVBAR1 or M_LINKS_NAVBAR2 %}
@@ -173,7 +198,7 @@
     {% if not M_FINE_PRINT is defined or M_FINE_PRINT %}
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        {{ (M_FINE_PRINT or SITENAME + ". Powered by `Pelican <https://getpelican.com>`_ and `m.css <https://mcss.mosra.cz>`_.")|render_rst|indent(8) }}
+              {{ (M_FINE_PRINT or SITENAME + ". Powered by `Pelican <https://getpelican.com>`_ and `m.css <https://mcss.mosra.cz>`_.")|render_rst|indent(8) }}
       </div>
     </div>
     {% endif %}

@@ -28,7 +28,7 @@
   --code-font: 'Source Code Pro', monospace;
   --font-size: 14px;
   --code-font-size: 1em; /* *not* rem, so it follows surrounding font size */
-  --paragraph-indent: 1.5rem;
+  --paragraph-indent: 0rem;
   --paragraph-align: justify;
   --link-decoration: underline;
   --link-decoration-nav: none;
@@ -43,9 +43,9 @@
   /* Basics */
   --background-color: #ffffff;
   --color: #000000;
-  --line-color: #f7e3db;
-  --link-color: #4267b2;
-  --link-active-color: #4267b2;
+  --line-color: #475674;
+  --link-color: #475674;
+  --link-active-color: #475674;
   --mark-color: #4c93d3;
   --mark-background-color: #e6e69c;
   --code-color: #5b5b5b;
@@ -62,7 +62,7 @@
   --header-background-color-landing: rgba(255, 255, 255, 0.75);
   --header-background-color-jumbo: rgba(255, 255, 255, 0.25);
   --header-link-color: #000000;
-  --header-link-active-color: #4267b2;
+  --header-link-active-color: #475674;
   --header-link-current-color: #ea7944;
   --header-link-active-background-color: #ffffff;
   --header-link-active-background-color: rgba(255, 255, 255, 0.5);
