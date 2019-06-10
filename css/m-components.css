@@ -1544,7 +1544,7 @@ li:last-child > div.m-plot:last-child, li:last-child > div.m-plot.m-nopadb {
 }
 label {
   display: inline-block;
-  background:url(/flaneur/static/details.svg) no-repeat left center;  
+  background:url(/static/details.svg) no-repeat left center;  
   margin: 0 2px 0;
   width: 16px;
 }
