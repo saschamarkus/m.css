@@ -71,7 +71,7 @@ body > header > nav a {
 }
 body > header > nav #m-navbar-brand, body > header > nav a#m-navbar-show, body > header > nav a#m-navbar-hide {
   font-weight: var(--heading-font-weight);
-  font-size: 1.125rem;
+  font-size: 3.0rem;
   padding-left: 1rem;
   padding-right: 1rem;
 }
