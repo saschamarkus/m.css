@@ -1583,3 +1583,35 @@ li:last-child > div.m-graph:last-child, li:last-child > div.m-graph.m-nopadb,
 li:last-child > div.m-plot:last-child, li:last-child > div.m-plot.m-nopadb {
   margin-bottom: 0;
 }
+label {
+  display: inline-block;
+  background:url(/static/details.svg) no-repeat left center;
+  margin: 0 2px 0;
+  width: 16px;
+}
+label:hover {
+  display: inline-block;
+  cursor: help;
+}
+input {
+  display: inline;
+  position: absolute;
+  left: -999em;
+}
+.hide {
+  display: none;
+  width: 50%;
+  border: 1px solid #000;
+  max-height: 99em;
+  opacity: 0;
+  height: auto;
+  overflow: hidden;
+  transition: opacity 1.5s linear, max-height 1.5s linear;
+}
+input[type="checkbox"]:checked + span {
+  opacity: 1;
+  display: inline;
+  max-height: 0;
+  background-color: #00257133;
+  border: none;
+}

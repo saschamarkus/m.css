@@ -1,6 +1,6 @@
 {% extends "base_blog_section.html" %}
 
-{% block title %}Posts tagged {{ tag|e }} | {{ M_BLOG_NAME|e }}{% endblock %}
+{% block title %}Beiträge getagged {{ tag|e }} | {{ M_BLOG_NAME|e }}{% endblock %}
 
 {% block meta %}
   {% if tag.page and tag.page.description %}
@@ -24,7 +24,7 @@
 
 {% block content_title %}
       <div class="m-info m-note">
-        Showing only posts tagged <em>{{ tag|e }}</em>. <a href="{{ M_BLOG_URL|format_siteurl|e }}">Show all posts.</a>
+        Nur Beiträge mit Tag <em>{{ tag|e }}</em>. <a href="{{ M_BLOG_URL|format_siteurl|e }}">Zeige alle Beiträge.</a>
       </div>
       {% if tag.page and tag.page.content and articles_page.number == 1 %}
       <div class="m-block m-info">

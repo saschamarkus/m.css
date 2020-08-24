@@ -1779,6 +1779,51 @@ li:last-child > div.m-graph:last-child, li:last-child > div.m-graph.m-nopadb,
 li:last-child > div.m-plot:last-child, li:last-child > div.m-plot.m-nopadb {
   margin-bottom: 0;
 }
+label {
+  display: inline-block;
+  background:url(/static/details.svg) no-repeat left center;
+  margin: 0 2px 0;
+  width: 16px;
+}
+label:hover {
+  display: inline-block;
+  cursor: help;
+}
+input {
+  display: inline;
+  position: absolute;
+  left: -999em;
+}
+.hide {
+  display: none;
+  width: 50%;
+  border: 1px solid #000;
+  max-height: 99em;
+  opacity: 0;
+  height: auto;
+  overflow: hidden;
+  transition: opacity 1.5s linear, max-height 1.5s linear;
+}
+input[type="checkbox"]:checked + span {
+  opacity: 1;
+  display: inline;
+  max-height: 0;
+  background-color: #00257133;
+  border: none;
+}
+body > header > nav {
+  width: 100%;
+  background-color: #ffffff;
+  min-height: 3rem;
+}
+body > header > nav.m-navbar-landing,
+body > header > nav.m-navbar-cover {
+  background-color: transparent;
+  position: relative;
+}
+body > header > nav.m-navbar-landing {
+  opacity: 0.8;
+}
 
 body > header > nav {
   width: 100%;
@@ -1820,7 +1865,7 @@ body > header > nav {
 }
 body > header > nav a {
   text-decoration: none;
-  text-transform: lowercase;
+  text-transform: var(--nav-menu-case);
   display: inline-block;
   vertical-align: middle;
   line-height: 2.75rem;
@@ -1828,12 +1873,12 @@ body > header > nav a {
 }
 body > header > nav #m-navbar-brand, body > header > nav a#m-navbar-show, body > header > nav a#m-navbar-hide {
   font-weight: normal;
-  font-size: 1.125rem;
+  font-size: 3.0rem;
   padding-left: 1rem;
   padding-right: 1rem;
 }
 body > header > nav a#m-navbar-brand, body > header > nav #m-navbar-brand a {
-  text-transform: lowercase;
+  text-transform: var(--nav-brand-case);
 }
 body > header > nav a#m-navbar-brand img, body > header > nav #m-navbar-brand a img {
   width: 1.75rem;
@@ -1992,7 +2037,7 @@ body > footer > nav ul {
 }
 body > footer > nav a {
   text-decoration: none;
-  text-transform: lowercase;
+  text-transform: var(--nav-menu-case);
   color: #191919;
 }
 body > footer > nav a:hover, body > footer > nav a:focus, body > footer > nav a:active {
@@ -2186,7 +2231,7 @@ nav.m-navpanel h3 {
   font-weight: normal;
 }
 nav.m-navpanel ol {
-  text-transform: lowercase;
+  text-transform: var(--nav-categories-case);
 }
 nav.m-navpanel ol, nav.m-navpanel ul {
   list-style-type: none;
