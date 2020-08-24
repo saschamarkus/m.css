@@ -1,6 +1,6 @@
 {% extends "base_blog_section.html" %}
 
-{% block title %}Posts by {{ author|e }} | {{ M_BLOG_NAME|e }}{% endblock %}
+{% block title %}Beiträge von {{ author|e }} | {{ M_BLOG_NAME|e }}{% endblock %}
 
 {% block meta %}
   {% if author.page and author.page.description %}
@@ -33,7 +33,7 @@
 
 {% block content_title %}
       <div class="m-info m-note">
-        Showing only posts by <em>{{ author|e }}</em>. <a href="{{ M_BLOG_URL|format_siteurl|e }}">Show all posts.</a>
+        Zeige nur Beiträge von <em>{{ author|e }}</em>. <a href="{{ M_BLOG_URL|format_siteurl|e }}">Zeige alle Beiträge.</a>
       </div>
       {% if author.page and author.page.content and articles_page.number == 1 %}
       <div class="m-block m-success{% if author.page.image %} m-badge{% endif %}">
